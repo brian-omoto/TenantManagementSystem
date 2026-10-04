@@ -1,47 +1,31 @@
 package com.example.tenantmanagementsystem
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.tenantmanagementsystem.ui.theme.TenantManagementSystemTheme
+import androidx.appcompat.app.AppCompatActivity
+import com.example.tenantmanagementsystem.databinding.ActivityMainBinding
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            TenantManagementSystemTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+
+        // Inflate the binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Make the SAVE button work
+        binding.saveButton.setOnClickListener {
+            val name = binding.tenantNameEditText.text.toString()
+            val phone = binding.phoneEditText.text.toString()
+            val rent = binding.rentEditText.text.toString()
+
+            // Create a Tenant object with the entered data
+            val tenant = Tenant(name, phone, rent)
+
+            // Pass the object to the XML layout so it can display it
+            binding.tenant = tenant
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TenantManagementSystemTheme {
-        Greeting("Android")
     }
 }
