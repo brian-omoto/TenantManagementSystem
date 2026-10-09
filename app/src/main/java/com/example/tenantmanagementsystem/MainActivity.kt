@@ -1,31 +1,43 @@
 package com.example.tenantmanagementsystem
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tenantmanagementsystem.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var lastTenant: Tenant? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Inflate the binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Make the SAVE button work
+        // SAVE button logic
         binding.saveButton.setOnClickListener {
             val name = binding.tenantNameEditText.text.toString()
             val phone = binding.phoneEditText.text.toString()
             val rent = binding.rentEditText.text.toString()
 
-            // Create a Tenant object with the entered data
             val tenant = Tenant(name, phone, rent)
-
-            // Pass the object to the XML layout so it can display it
             binding.tenant = tenant
+            lastTenant = tenant // Remember the last saved tenant
+        }
+
+        // CALL TENANT button logic (Implicit Intent)
+        binding.callButton.setOnClickListener {
+            val tenant = lastTenant
+            if (tenant == null) {
+                Toast.makeText(this, "Save a tenant first", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${tenant.phone}"))
+            startActivity(intent)
         }
     }
 }
