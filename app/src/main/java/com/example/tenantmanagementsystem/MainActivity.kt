@@ -17,17 +17,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ==========================================
         // CHALLENGE 2: Welcome the user
-        // ==========================================
+        
         val userEmail = intent.getStringExtra("USER_EMAIL")
         if (userEmail != null) {
             Toast.makeText(this, "Logged in as $userEmail", Toast.LENGTH_LONG).show()
         }
 
-        // ==========================================
+        
         // SAVE Button Logic (Includes CHALLENGE 3: Validation)
-        // ==========================================
+        
         binding.saveButton.setOnClickListener {
             val name = binding.tenantNameEditText.text.toString()
             val phone = binding.phoneEditText.text.toString()
@@ -53,9 +52,9 @@ class MainActivity : AppCompatActivity() {
             lastTenant = tenant
         }
 
-        // ==========================================
+        
         // CALL Button Logic (Implicit Intent)
-        // ==========================================
+        
         binding.callButton.setOnClickListener {
             val tenant = lastTenant
             if (tenant == null) {
@@ -67,9 +66,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // ==========================================
+        
         // CHALLENGE 1: SHARE Button Logic (Implicit Intent)
-        // ==========================================
+        
         binding.shareButton.setOnClickListener {
             val tenant = lastTenant
             if (tenant == null) {
