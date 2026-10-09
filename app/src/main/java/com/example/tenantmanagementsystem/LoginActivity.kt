@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 1. Read the email passed from RegisterActivity
+        // 1. Reads the email passed from RegisterActivity
         val registeredEmail = intent.getStringExtra("EMAIL")
         if (registeredEmail != null) {
             binding.emailEditText.setText(registeredEmail)
@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             val intent = Intent(this, MainActivity::class.java)
+	    intent.putExtra("USER_EMAIL", email)
             startActivity(intent)
             finish()
         }
