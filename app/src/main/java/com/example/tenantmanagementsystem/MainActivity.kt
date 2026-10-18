@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ==========================================
+        
         // PART B: RESTORE STATE
-        // ==========================================
+        
         if (savedInstanceState != null) {
             val name = savedInstanceState.getString("tenant_name")
             val phone = savedInstanceState.getString("tenant_phone")
@@ -95,9 +95,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // ==========================================
+    
     // PART B: SAVE STATE
-    // ==========================================
+    
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         Log.d("TENANT_LIFECYCLE", "MainActivity: onSaveInstanceState")
@@ -110,9 +110,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // ==========================================
+    
     // PART A: LIFECYCLE METHODS
-    // ==========================================
+    
     override fun onStart() {
         super.onStart()
         Log.d("TENANT_LIFECYCLE", "MainActivity: onStart")
